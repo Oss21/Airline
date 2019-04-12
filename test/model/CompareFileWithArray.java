@@ -38,10 +38,9 @@ public class CompareFileWithArray {
 			BufferedReader lectora = new BufferedReader(fa);
 			line = lectora.readLine();
 			int i = 0;
-			System.out.println(line);
 			while (line != null && !salir) {
-				System.out.println("Expected"+"  "+"Actual");
-				System.out.println(line+"  "+array[i]);
+//				System.out.println("Expected"+"  "+"Actual");
+//				System.out.println(line+"  "+array[i]);
 				if (line.equalsIgnoreCase(array[i])) {
 					same = true;
 				}else {

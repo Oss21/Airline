@@ -21,8 +21,8 @@ class AirportTest {
 		flightsDos = new ArrayList<Flight>();
 		airport = new Airport("CLO");
 		
-		airlines.add(new Airline("Avianca"));
 		airlines.add(new Airline("Latam"));
+		airlines.add(new Airline("Avianca"));
 		airport.setAirlines(airlines);
 		
 		flights.add(new Flight(10, 20,2, 05, 3, 9,2021, "Miami"));
@@ -81,9 +81,9 @@ class AirportTest {
 		setupEscenary2();
 		//Verifica si el arhivo esta correcto
 		try {
-			assertTrue(CompareFileWithArray.assertEqualsCompareFileWithArrangement(nameOfAirlines,"data/Destination_city_data.txt"));
+			assertTrue(CompareFileWithArray.assertEqualsCompareFileWithArrangement(nameOfAirlines,Airport.PATH_NAME_OF_AIRLINES));
 		} catch (IOException | DifferentSizesException e) {
-			e.printStackTrace();
+			
 		}
 		// Probar si la excepcion se lanza al no tener los mismos numero de datos y mismos arhchivos.
 		try {
@@ -94,6 +94,47 @@ class AirportTest {
 		
 		}
 
+	}
+	
+	@Test
+	public void checkSortByAirline() {
+		setupEscenary1();
+		String[] compare = {"Avianca", "Latam"};
+		airport.sortByAirline();
+		for (int i = 0; i < airlines.size(); i++) {
+			assertEquals(compare[i], airport.getAirlines().get(i).getName());
+			
+		}
+		
+		
+	}
+	
+	@Test
+	public void checkSearchByAirline() {
+		setupEscenary1();
+		String name = "Avianca";
+		assertEquals(name, airport.searchByAirline(name).getName());
+	}
+	
+ ///Realizar diseño
+	@Test
+	public void checkGenerateFlights() throws IOException {
+		setupEscenary2();
+		airport.loadAirlinesNames();
+		airport.generateFlights(20);
+		int size = airport.getAirlines().size()-1;
+		System.out.println(size);
+		for (int i = 0; i < size; i++) {
+			System.out.println(airport.getAirlines().get(i).getName());
+		}
+		for (int j = 0; j < nameOfAirlines.length; j++) {
+			int sizeFlight = airport.getAirlines().get(j).getFlights().size();
+			for (int i = 0; i < sizeFlight; i++) {
+				System.out.println(airport.getAirlines().get(j).getFlights().get(i).toString());
+				
+			}
+			
+		}
 	}
 	
 	

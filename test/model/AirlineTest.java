@@ -13,8 +13,8 @@ class AirlineTest {
 
 	public void setupEscenary1() {
 		flights = new ArrayList<Flight>();
-		flights.add(new Flight(6,8,2,30,9,12,2020,"New York"));
-		flights.add(new Flight(3, 50,10, 05, 3, 9, 2021, "Miami"));
+		flights.add(new Flight(6,50,2,30,9,12,2020,"New York"));
+		flights.add(new Flight(3, 8,10, 05, 3, 9, 2021, "Miami"));
 		airline = new Airline("Avianca");
 		airline.setFlights(flights);		
 	}
@@ -104,6 +104,75 @@ class AirlineTest {
 		assertEquals(air,airline.getName());
 	}
 	
+	@Test
+	public void checkComparTo() {
+		setupEscenary3();
+		Airline airlineDos = new Airline("Copa Airlines");
+		Airline airlineTres = new Airline("Avianca");
+		Airline airlineCuatro = new Airline("Latam");
+		int iguales = 0;
+		int mayor = airline.compareTo(airlineTres);
+		int menor = airline.compareTo(airlineCuatro);
+		assertEquals(iguales,airline.compareTo(airlineDos));
+		assertEquals(mayor, airline.compareTo(airlineTres));
+		assertEquals(menor, airline.compareTo(airlineCuatro));
 
+	}
+	
+	@Test
+	public void checkSortByNumberOfFlight() {
+		setupEscenary1();
+		int[] orderedFlightNumber = {3,6};
+		airline.sortByNumberOfFlightOrSortByPortOfShipment('F');
+		for (int i = 0; i < flights.size(); i++) {
+			assertEquals(orderedFlightNumber[i],airline.getFlights().get(i).getNumberOfFlight());
+		}
+	}
+	
+	@Test
+	public void checkSortByDestinationCity() {
+		setupEscenary1();
+		String []  orderedDestinationCity = {"Miami","New York"};
+		airline.sortByDestinationCity();
+		for (int i = 0; i < flights.size(); i++) {
+			assertEquals(orderedDestinationCity[i], airline.getFlights().get(i).getDestinationCity());
+		}
+	}
+	
+	@Test
+	public void checkSortByPortOfShipment() {
+		setupEscenary1();
+		int []  orderedPortOfShipment = {8,50};
+		airline.sortByNumberOfFlightOrSortByPortOfShipment('S');
+		for (int i = 0; i < flights.size(); i++) {
+			assertEquals(orderedPortOfShipment[i], airline.getFlights().get(i).getPortOfShipment());
+		}
+	}
+	
+	
+	@Test
+	public void checkSearchByPortOfShipment() {
+		setupEscenary1();
+		int portOfShipment = 50;
+		assertEquals(airline.getFlights().get(0),airline.searchByPortOfShipment(portOfShipment));
+	}
+
+	// realizar diseño de pruebas.
+	@Test
+	public void checkSearchByDestinationCiy() {
+		setupEscenary1();
+		String destinationCity = "Miami";
+		assertEquals(airline.getFlights().get(1), airline.searchByDestinationCity(destinationCity));
+		
+	}
+	
+	@Test
+	public void checkSearchByNumberOfFlight() {
+		setupEscenary1();
+		int numberOfFlight = 3;
+		assertEquals(airline.getFlights().get(1),airline.searchByNumberOfFLight(numberOfFlight));
+
+	}
+	
 	
 }

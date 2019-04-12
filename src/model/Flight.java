@@ -1,6 +1,8 @@
 package model;
 
-public class Flight {
+import java.util.Comparator;
+
+public class Flight implements Comparable<Flight>{
 
 	private int numberOfFlight;
 	private int portOfShipment;
@@ -88,6 +90,27 @@ public class Flight {
 
 	public void setDestinationCity(String destinationCity) {
 		this.destinationCity = destinationCity;
+	}
+
+	
+
+	@Override
+	public int compareTo(Flight flightDos) {
+		int value= 0;
+		if (this.destinationCity.compareTo(flightDos.getDestinationCity()) > 0 ) {
+			value = 1;
+		}else if (this.destinationCity.compareTo(flightDos.getDestinationCity()) < 0) {
+			value = -1;
+		}
+		
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return "Flight [numberOfFlight=" + numberOfFlight + ", portOfShipment=" + portOfShipment + ", hour=" + hour
+				+ ", minute=" + minute + ", day=" + day + ", month=" + month + ", year=" + year + ", destinationCity="
+				+ destinationCity + "]";
 	}
 
 	

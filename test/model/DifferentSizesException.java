@@ -5,6 +5,11 @@ package model;
  *
  */
 public class DifferentSizesException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DifferentSizesException(String mensaje) {
 		super(mensaje);
 	}

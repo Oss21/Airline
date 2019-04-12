@@ -78,5 +78,25 @@ class FlightTest {
 		assertEquals(year, flight.getYear(), "No se establecio correctamnete el año al atributo year");
 	}
 	
-	
+	@Test
+	public void checkComparatorDestinationCity() {
+		setupEscenary1();
+		int numberOfFlight = 1;
+		int portOfShipment = 2;
+		int hour = 12;
+		int minute = 34;
+		int day = 1;
+		int month = 4;
+		int year = 2019;
+		String destinationCity = "Armenia";
+		Flight flightDos = new Flight(numberOfFlight, portOfShipment, hour, minute, day, month, year, destinationCity);
+		String destinationTres = "Risaralda";
+		Flight flightTres = new Flight(numberOfFlight, portOfShipment, hour, minute, day, month, year, destinationTres);
+		String destinationCuatro = "Bogota";
+		Flight flightCuatro = new Flight(numberOfFlight, portOfShipment, hour, minute, day, month, year, destinationCuatro);
+		
+		assertEquals(1, flight.compareTo(flightDos));
+		assertEquals(-1, flight.compareTo(flightTres));
+		assertEquals(0, flight.compareTo(flightCuatro));
+	}
 } 
